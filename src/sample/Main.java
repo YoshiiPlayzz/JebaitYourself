@@ -1,6 +1,5 @@
 package sample;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.net.MalformedURLException;
@@ -11,15 +10,12 @@ import java.net.URL;
 public class Main {
 
 
-    private static double trys;
+    private static double trys = 0;
     static JFrame frame;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args)  {
 
-
-
-        frame = new JFrame("An Usefull Program");
+        frame = new JFrame("An usefull App");
 
         frame.setSize(200, 200);
         frame.addNotify();
@@ -41,76 +37,55 @@ public class Main {
                     txt.setText("" +  (counter--));
                     try{
                         Thread.sleep(1000);
-                    } catch(Exception e) {}
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }.start();
         frame.add(txt);
-
-
-
         frame.pack();
-
 
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         frame.dispose();
         for(int i = 0; i < 2; i++){
             try {
                 i--;
                 trys++;
 
+                //Opens You got Jebaited
                 openWebpage(new URL("https://www.youtube.com/embed/tEo9sqzX1lQ?autoplay=1"));
+                //Random delay from 1.7-6.7 seconds between Jebaited
                 long delay = (int)(Math.random() * 5000 )+1700;
-                System.out.println("You got " + (int)trys + " times jebaited: " + delay + "ms");
-                Thread.sleep( delay);
+                Thread.sleep(delay);
 
             } catch (MalformedURLException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-
     }
 
-
-    private void initialize() {
-
-
-    }
-    public static void paint(Graphics g, String draw, String font, int fontsize, int fonttype) {
-        Dimension d = frame.getPreferredSize();
-
-
-        g.setFont(new Font(font,fonttype, fontsize));
-
-        g.setColor(Color.red);
-
-        g.drawString(draw, 10, 20);
-    }
-
-    public static boolean openWebpage(URI uri) {
+    private static void openWebpage(URI uri) {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {
                 desktop.browse(uri);
-                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
-    public static boolean openWebpage(URL url) {
+    private static void openWebpage(URL url) {
         try {
-            return openWebpage(url.toURI());
+            openWebpage(url.toURI());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        return false;
     }
 }
