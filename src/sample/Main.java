@@ -62,6 +62,7 @@ public class Main {
                 openWebpage(new URL("https://www.youtube.com/embed/tEo9sqzX1lQ?autoplay=1"));
                 //Random delay from 1.7-6.7 seconds between Jebaited
                 long delay = (int)(Math.random() * 5000 )+1700;
+                System.out.println("You got " + (int)trys + " times jebaited: " + delay + "ms");
                 Thread.sleep(delay);
 
             } catch (MalformedURLException | InterruptedException e) {
